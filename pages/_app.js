@@ -1,4 +1,5 @@
 import "../styles/globals.css"
+import styles from "../styles/Home.module.css"
 import { MoralisProvider } from "react-moralis"
 import Header from "../components/Header"
 import Head from "next/head"
@@ -7,7 +8,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
 
 const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: process.env.NEXT_PUBLIC_SUBGRAPH_URL,
+    uri: "https://api.studio.thegraph.com/query/33778/nft-marketplace-v1/v0.0.1",
 })
 
 function MyApp({ Component, pageProps }) {

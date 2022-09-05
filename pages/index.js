@@ -14,8 +14,9 @@ export default function Home() {
 
     return (
         <div className="container mx-auto">
-            <h1 className="py-4 px-4 font-bold text-2xl">Recently Listed</h1>
-            <div className="flex flex-wrap">
+            <h1 className="py-4 px-4 font-bold text-2xl ">Recently Listed</h1>
+            <div className="grid grid-cols-2">
+            <div className="flex flex-wrap mt-10 ml-5">
                 {isWeb3Enabled ? (
                     loading || !listedNfts ? (
                         <div>Loading...</div>
@@ -39,6 +40,14 @@ export default function Home() {
                     <div>Web3 Currently Not Enabled</div>
                 )}
             </div>
+            <div className=" flex flex-wrap mt-10 mr-5">
+            hallo!
+
+            </div>
+
+            </div>
+            
+            
         </div>
     )
 }
