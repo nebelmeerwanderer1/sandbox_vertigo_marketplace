@@ -1,6 +1,6 @@
 import { Modal, Input, useNotification } from "web3uikit"
 import { useState } from "react"
-import { useWeb3Contract } from "react-moralis"
+import { useWeb3Contract, useMoralis } from "react-moralis"
 import nftMarketplaceAbi from "../constants/NftMarketplace.json"
 import { ethers } from "ethers"
 
@@ -11,6 +11,9 @@ export default function UpdateListingModal({
     marketplaceAddress,
     onClose,
 }) {
+
+    const { isWeb3Enabled, chainId } = useMoralis()
+
     const dispatch = useNotification()
 
     const [priceToUpdateListingWith, setPriceToUpdateListingWith] = useState(0)
@@ -39,6 +42,8 @@ export default function UpdateListingModal({
     })
 
     return (
+        <div>
+        {isWeb3Enabled ? (
         <Modal
             isVisible={isVisible}
             onCancel={onClose}
@@ -51,7 +56,7 @@ export default function UpdateListingModal({
                     onSuccess: handleUpdateListingSuccess,
                 })
             }}
-        >
+        >        
             <Input
                 label="Update listing price in L1 Currency (ETH)"
                 name="New listing price"
@@ -59,7 +64,18 @@ export default function UpdateListingModal({
                 onChange={(event) => {
                     setPriceToUpdateListingWith(event.target.value)
                 }}
-            />
-        </Modal>
+            /> 
+        </Modal>         
+        ) : (
+        <Modal
+            isVisible={isVisible}
+            onCancel={onClose}
+            onCloseButtonPressed={onClose}
+            onOk={onClose}
+        >        
+            <div>Web3 Currently Not Enabled - a wallet needs to be connected to buy NFTs</div>
+        </Modal>                 
+            )}
+            </div>
     )
 }

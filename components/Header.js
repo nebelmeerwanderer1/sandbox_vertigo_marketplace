@@ -21,6 +21,9 @@ export default function Header() {
                 <Link href="/sell-nft">
                     <a className="mr-4 p-6">Sell NFT</a>
                 </Link>
+                <Link href="/mint-nft">
+                    <a className="mr-4 p-6">Mint NFT</a>
+                </Link>
                 <div className="ml-auto py-2 px-4">
                     <ConnectButton moralisAuth={false} />
                 </div>

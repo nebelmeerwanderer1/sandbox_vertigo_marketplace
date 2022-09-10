@@ -29,14 +29,26 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     const hideModal = () => setShowModal(false)
     const dispatch = useNotification()
 
-    const { runContractFunction: getTokenURI } = useWeb3Contract({
-        abi: nftAbi,
-        contractAddress: nftAddress,
-        functionName: "tokenURI",
-        params: {
-            tokenId: tokenId,
-        },
-    })
+
+    const key = "https://eth-goerli.g.alchemy.com/v2/8KiFJHm2GddOzJLAlXkSHjVPDz1DNY_p";
+    const provider = new ethers.providers.JsonRpcProvider(key);
+
+    const TokenURI = async () => {
+        const nftBasic = new ethers.Contract(nftAddress, nftAbi, provider)
+        const tokenUri = await nftBasic.tokenURI(tokenId)
+        console.log(`TTokenURI: ${tokenUri}`)
+        return tokenUri
+        
+    }
+
+    // const { runContractFunction: getTokenURI } = useWeb3Contract({
+    //     abi: nftAbi,
+    //     contractAddress: nftAddress,
+    //     functionName: "tokenURI",
+    //     params: {
+    //         tokenId: tokenId,
+    //     },
+    // })
 
     const { runContractFunction: buyItem } = useWeb3Contract({
         abi: nftMarketplaceAbi,
@@ -50,7 +62,7 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     })
 
     async function updateUI() {
-        const tokenURI = await getTokenURI()
+        const tokenURI = await TokenURI()
         console.log(`The TokenURI is ${tokenURI}`)
         console.log(`nftAbi is ${JSON.stringify(nftAbi)}`)
         console.log(`The nftAddress is ${nftAddress}`)
@@ -76,9 +88,9 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     }
 
     useEffect(() => {
-        if (isWeb3Enabled) {
+        
             updateUI()
-        }
+        
     }, [isWeb3Enabled])
 
     const isOwnedByUser = seller === account || seller === undefined
@@ -87,10 +99,10 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     const handleCardClick = () => {
         isOwnedByUser
             ? setShowModal(true)
-            : buyItem({
+            : (isWeb3Enabled ? (buyItem({
                   onError: (error) => console.log(error),
                   onSuccess: handleBuyItemSuccess,
-              })
+              })) : ( setShowModal(true)))
     }
 
     const handleBuyItemSuccess = async (tx) => {
@@ -132,9 +144,9 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
                                         height="200"
                                         width="200"
                                     />
-                                    {/* <div className="font-bold">
+                                    <div className="font-bold">
                                         {ethers.utils.formatUnits(price, "ether")} ETH
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
                         </Card>

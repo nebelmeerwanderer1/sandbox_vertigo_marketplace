@@ -1,6 +1,6 @@
 import styles from "../styles/Home.module.css"
 import { useMoralisQuery, useMoralis } from "react-moralis"
-import NFTBox from "../components/NFTBox"
+import NFTBox from "../components/NFTBox-index"
 import networkMapping from "../constants/networkMapping.json"
 import GET_ACTIVE_ITEMS from "../constants/subgraphQueries"
 import { useQuery } from "@apollo/client"
@@ -17,8 +17,8 @@ export default function Home() {
             <h1 className="py-4 px-4 font-bold text-2xl ">Recently Listed</h1>
             <div className="grid grid-cols-2">
             <div className="flex flex-wrap mt-10 ml-5">
-                {isWeb3Enabled ? (
-                    loading || !listedNfts ? (
+                {/* {isWeb3Enabled ? ( */}
+                    {loading || !listedNfts ? (
                         <div>Loading...</div>
                     ) : (
                         listedNfts.activeItems.map((nft) => {
@@ -35,10 +35,10 @@ export default function Home() {
                                 />
                             )
                         })
-                    )
-                ) : (
-                    <div>Web3 Currently Not Enabled</div>
-                )}
+                    )}
+                {/* ) : (
+                     <div>Web3 Currently Not Enabled</div>
+                )} */}
             </div>
             <div className=" flex flex-wrap mt-10 mr-5">
             hallo!

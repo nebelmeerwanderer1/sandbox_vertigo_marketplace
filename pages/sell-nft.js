@@ -18,6 +18,7 @@ export default function Home() {
 
     async function approveAndList(data) {
         console.log("Approving...")
+        console.log(`nftadress: ${data.data[0].inputResult}`)
         const nftAddress = data.data[0].inputResult
         const tokenId = data.data[1].inputResult
         const price = ethers.utils.parseUnits(data.data[2].inputResult, "ether").toString()
@@ -47,6 +48,7 @@ export default function Home() {
             abi: nftMarketplaceAbi,
             contractAddress: marketplaceAddress,
             functionName: "listItem",
+            gasLimit: 150000,
             params: {
                 nftAddress: nftAddress,
                 tokenId: tokenId,
@@ -70,6 +72,8 @@ export default function Home() {
             position: "topR",
         })
     }
+
+    // related to withdrawing proceeds
 
     const handleWithdrawSuccess = async (tx) => {
         await tx.wait(1)
