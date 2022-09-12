@@ -1,5 +1,5 @@
 import { Alchemy, Network } from "alchemy-sdk"
-import GET_ACTIVE_ITEMS from "../../constants/subgraphQueries"
+//import GET_ACTIVE_ITEMS from "../constants/subgraphQueries"
 import { useQuery } from "@apollo/client"
 import { ethers} from "ethers"
 

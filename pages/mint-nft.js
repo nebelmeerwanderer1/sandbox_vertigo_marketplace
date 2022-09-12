@@ -11,7 +11,7 @@ import {
   listNftsForOwner,
   alchemy,
   nftPriceList
-} from "./utils/interaction.js";
+} from "../components/interaction.js";
 import nftAbi from "../constants/BasicNft.json"
 
 //above: A-side  -- below: B-side
