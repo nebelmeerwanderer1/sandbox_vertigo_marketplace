@@ -51,10 +51,10 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
 
     async function updateUI() {
         const tokenURI = await getTokenURI()
-        console.log(`The TokenURI is ${tokenURI}`)
-        console.log(`nftAbi is ${JSON.stringify(nftAbi)}`)
-        console.log(`The nftAddress is ${nftAddress}`)
-        console.log(`The TokenId is ${tokenId}`)
+        // console.log(`The TokenURI is ${tokenURI}`)
+        // console.log(`nftAbi is ${JSON.stringify(nftAbi)}`)
+        // console.log(`The nftAddress is ${nftAddress}`)
+        // console.log(`The TokenId is ${tokenId}`)
 
         // We are going to cheat a little here...
         if (tokenURI) {
@@ -132,9 +132,10 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
                                         height="200"
                                         width="200"
                                     />
-                                    {/* <div className="font-bold">
-                                        {ethers.utils.formatUnits(price, "ether")} ETH
-                                    </div> */}
+                                    <div className="font-bold">
+                                        
+                                        Price: {price}
+                                    </div>
                                 </div>
                             </div>
                         </Card>

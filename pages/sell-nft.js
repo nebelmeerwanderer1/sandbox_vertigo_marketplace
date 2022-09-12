@@ -67,8 +67,8 @@ export default function Home() {
         await tx.wait(1)
         dispatch({
             type: "success",
-            message: "NFT listing",
-            title: "NFT listed",
+            message: "NFT listed !!! Yay",
+            title: "NFT listing:  ",
             position: "topR",
         })
     }
