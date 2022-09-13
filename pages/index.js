@@ -7,42 +7,6 @@ import { useQuery } from "@apollo/client"
 import { jsx, Container, Box, Grid, Text, Heading } from "theme-ui";
 import TextFeature from "../components/text-feature";
 
-const data = {
-  subTitle: "a behind-the-scenes look at non-fungible tokens (nft) and nft marketplaces",
-  title: "",
-  features: [
-    {
-      id: 1,
-      
-      altText: "Smart Features",
-      title: "don't expect to get rich selling pup nfts",
-      text: "this web site is designed to explain what happens beneath the hood when you mint nfts - then list your nfts for sale - and buy nft from others. it runs on the ethereum goerli testnet",
-    },
-    {
-      id: 2,
-      
-      altText: "Secure Contents",
-      title: "to the left you have nfts that are listed on the marketplace",
-      text: "what does that mean: The owner of the nft has approved that marketplace can transfer the nft to a user provided the required amount is transferred to the marketplace",
-    },
-    {
-      id: 2,
-      
-      altText: "Secure Contents",
-      title: "the purchase of the nft is a transaction that involves the marketplace and a buyer",
-      text: "what does that mean: the owner is not involved in the purchase transaction. he or she has approved that the marketplace can sell the nft and the received amount is stored in the marketplace until it is picked up.",
-    },
-    {
-      id: 2,
-      
-      altText: "Secure Contents",
-      title: "what if the website is closed",
-      text: "that is the beauty of it: all funds and nfts are stored in the smart contract that lives on ethereum. if this website shuts down then the valuables are not lost. of course it might be a bit more inconvenient to sell them for a period until there is a new site but anyone with a computer could actually mint, sell or buy with a bit of effort.",
-    },
-  ],
-};
-
-
 
 export default function Home() {
     const { isWeb3Enabled, chainId } = useMoralis()
@@ -79,24 +43,31 @@ export default function Home() {
                      <div>Web3 Currently Not Enabled</div>
                 )} */}
             </div>
-            <div className=" flex-wrap mt-10 mr-10 ml-10">
-           <Box sx={styles.headingTop}>
-            <TextFeature subTitle={data.subTitle} title={data.title} />
-          </Box>
+            <div className=" flex-wrap mt-10 mr-10 ml-10 bg-slate-100">
+              <h1 className="py-4 px-4 font-bold text-xl ">what is actually happening here?</h1>
 
-          <Grid gap="15px 0" columns={1} sx={styles.grid}>
-            {data.features.map((item) => (
-              <Box sx={styles.card} key={item.id}>
-                
+              <h1 className="py-4 px-4 ">this web site is designed to explain what happens beneath the hood when you mint nfts, list for sale and buy nft from others. </h1>
 
-                <Box sx={styles.wrapper}>
-                  <Heading sx={styles.wrapper.title}>{item.title}</Heading>
-                  <Text sx={styles.wrapper.subTitle}>{item.text}</Text>
-                </Box>
-              </Box>
-            ))}
-          </Grid>
-        
+              <h1 className="py-4 px-4 ">it is genuinely blockchain based if someone asks: it runs on the ethereum's goerli testnet and the nfts follow the ERC-721 standard</h1>
+              
+              <h1 className="py-4 px-4 ">to the left you have nfts that exist on the blockchain and are listed for sale on the marketplace </h1>
+
+              <h1 className="py-4 px-4 ">creating an nft is called 'minting'. that means activating a smart contract that can create a unique token - the smart contract maintains a list of all the nfts and owner accounts</h1>
+              
+              <h1 className="py-4 px-4 ">so before you can mint an nft you need an account. download a wallet to get an account. For instance metamask.</h1>
+              
+              <h1 className="py-4 px-4 ">you will also need a bit of ETH - since this is a testnet it is really just funny money. you only need real ETH if it is on ethereum mainnet</h1>
+              
+              <h1 className="py-4 px-4 ">you can get some goerli eth here : https://goerli-faucet.pk910.de/ . but get an account first. </h1>
+                 
+              
+              
+              
+              
+              
+              
+              
+              
             </div>
 
             </div>
@@ -139,9 +110,9 @@ const styles = {
     order: [2, null, null, 0],
   },
   contentBox: {
-    width: ["100%", 450, 550, 350, 550, 600],
+    width: ["100%", 450, 550, 350, 550, 1000],
     mr: [2, 2, 2, 2, 2, 2],
-    pr: [0, null, "auto", null, null, 80],
+    pr: [0, null, "auto", null, null, 0],
     pl: "auto",
     flexShrink: 0,
   },
