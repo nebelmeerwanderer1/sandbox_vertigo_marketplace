@@ -40,7 +40,7 @@ export default function Home() {
                         })
                     )}
                 {/* ) : (
-                     <div>Web3 Currently Not Enabled</div>
+                     <div>Web3 Currently Not Enabled - it sure ain't</div>
                 )} */}
             </div>
             <div className=" flex-wrap mt-10 mr-10 ml-10 bg-slate-100">
