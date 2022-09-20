@@ -24,6 +24,7 @@ export default function Home() {
     const [status, setStatus] = useState("")
     const [wallet, setWallet] = useState(" ")
     const [mintstatus, setMintstatus] = useState("")
+    const [updatestatus, setUpdatestatus] = useState("")
     
     const { runContractFunction } = useWeb3Contract()
 
@@ -199,6 +200,71 @@ export default function Home() {
         return txhash
     }
 
+    //related to update functionality ------------------------------------  
+
+    const onUpdatePressed = async (data) => {
+
+    if (!isWeb3Enabled) {
+        setUpdatestatus("Connect your wallet")
+        return
+    }
+    
+    // create tokenURI --
+    console.log(`url: ${JSON.stringify(data)}`)    
+
+    const info = {
+      url: data.data[1].inputResult,
+      name: data.data[2].inputResult, 
+      description: data.data[3].inputResult,
+      tokenid: data.data[0].inputResult,
+    }   
+    
+    console.log(info.url)
+    
+    const res = await fetch("/api/createTokenUri", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(info)
+    });
+
+    const tokenURI = await res.json();
+    console.log(tokenURI)  
+    
+    //sign transaction via Metamask
+    try {
+        const txHash = await updateNFT(info.tokenid, tokenURI.tokenURI)
+        console.log(txHash.hash)
+        setUpdatestatus("✅ Check out your transaction on Etherscan: https://goerli.etherscan.io/tx/" + txHash.hash)  
+             
+    } catch (error) {
+        setUpdatestatus("😥 Something went wrong: " + error.message)
+        setTimeout(location.reload(), 3000)
+        return        
+    }
+    };
+    
+    async function updateNFT(tokenId, tokenURI) {
+        console.log("Ok! Now time to mint")
+        const updateNFT = {
+            abi: contractABI,
+            contractAddress: contractAddress,
+            functionName: "updateNFT",
+            gasLimit: 150000,
+            params: {
+                tokenId: tokenId,
+                tokenURI: tokenURI,                
+            },
+        }
+
+        const txhash = await runContractFunction({
+            params: updateNFT,
+            onError: (error) => console.log(error),
+        })
+        return txhash
+    }
+
     // when to trigger functions -----------------------------
 
     useEffect(() => {
@@ -319,7 +385,9 @@ export default function Home() {
                         name: "Owner's address: E.g. you or your best friend",
                         type: "text",
                         inputWidth: "100%",
-                        
+                        validation: {
+                            required: true
+                            },                        
                         value: "",
                         key: "owner",
                     },
@@ -330,6 +398,56 @@ export default function Home() {
                 />
                 <p id="mintstatus" className={styles.ddescription}>
                 {mintstatus}
+                </p>
+                <Form 
+                    data={[
+                    {
+                        name: "Token Id # of the NFT that you want to update",
+                        type: "number",
+                        inputWidth: "100%",
+                        validation: {
+                            required: true
+                            },                        
+                        value: "",
+                        key: "tokenid",
+                    },
+                    {
+                        name: "New link to asset: E.g. https://gateway.pinata.cloud/ipfs/<hash>",
+                        type: "text",
+                        inputWidth: "100%",
+                        validation: {
+                            required: true
+                            },
+                        value: "",
+                        key: "url",
+                    },
+                    {
+                        name: "New name: E.g. My first NFT!",
+                        type: "text",
+                        inputWidth: "100%",
+                        validation: {
+                            required: true
+                            },
+                        value: "",
+                        key: "name",
+                    },
+                    {
+                        name: "New description: E.g. Even cooler than cryptokitties ;)",
+                        type: "text",
+                        inputWidth: "100%",
+                        validation: {
+                            required: true
+                            },
+                        value: "",
+                        key: "description",
+                    },  
+                ]}
+                title="Update your NFT!"
+                id="Update Form" 
+                onSubmit={onUpdatePressed}             
+                />
+                <p id="updatestatus" className={styles.ddescription}>
+                    {updatestatus}
                 </p>
             
                 <Form
