@@ -7,6 +7,7 @@ import { Card, useNotification } from "web3uikit"
 import { ethers } from "ethers"
 import UpdateListingModal from "./UpdateListingModal"
 
+
 const truncateStr = (fullStr, strLen) => {
     if (fullStr.length <= strLen) return fullStr
 
@@ -20,7 +21,7 @@ const truncateStr = (fullStr, strLen) => {
     )
 }
 
-export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress, seller }) {
+export default function NFTBox({ price, nftAddress, contractABI, tokenId, marketplaceAddress, seller }) {
     const { isWeb3Enabled, account } = useMoralis()
     const [imageURI, setImageURI] = useState("")
     const [tokenName, setTokenName] = useState("")
@@ -30,7 +31,7 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
     const dispatch = useNotification()
 
     const { runContractFunction: getTokenURI } = useWeb3Contract({
-        abi: nftAbi,
+        abi: contractABI,
         contractAddress: nftAddress,
         functionName: "tokenURI",
         params: {
@@ -121,8 +122,8 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
                             onClick={handleCardClick}
                         >
                             <div className="p-2">
-                                <div className="flex flex-col items-end gap-2">
-                                    <div>#{tokenId}</div>
+                                <div className="flex flex-col items-center gap-3">
+                                    <div> {nftAddress}   - tokenId # {tokenId}</div>
                                     <div className="italic text-sm">
                                         Owned by {formattedSellerAddress}
                                     </div>
@@ -133,8 +134,8 @@ export default function NFTBox({ price, nftAddress, tokenId, marketplaceAddress,
                                         width="200"
                                     />
                                     <div className="font-bold">
-                                        
-                                        Price: {price}
+{/*                                         
+                                        Price: {price} */}
                                     </div>
                                 </div>
                             </div>

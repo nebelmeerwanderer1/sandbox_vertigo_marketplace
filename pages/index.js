@@ -17,7 +17,7 @@ export default function Home() {
 
     return (
         <div className="container mx-auto">
-            <h1 className="py-4 px-4 font-bold text-2xl ">Recently Listed</h1>
+            <h1 className="py-4 px-4 font-bold text-2xl ">Recently Listed for sale</h1>
             <div className="grid grid-cols-2">
             <div className="flex flex-wrap mt-10 ml-5">
                 {/* {isWeb3Enabled ? ( */}

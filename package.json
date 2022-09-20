@@ -11,10 +11,13 @@
     "moralis:cloud": "moralis-admin-cli watch-cloud-folder --moralisSubdomain tlnhmczb6uvm.usemoralis.com --autoSave 1 --moralisCloudfolder ./cloudFunctions"
   },
   "dependencies": {
+    "@alch/alchemy-web3": "^1.4.6",
     "@apollo/client": "^3.6.9",
     "@emotion/react": "^11.10.4",
     "@mdx-js/react": "^1.6.22",
     "alchemy-sdk": "^2.0.4",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
     "ethers": "^5.6.9",
     "graphql": "^16.6.0",
     "magic-sdk": "^9.0.0",
@@ -24,6 +27,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-moralis": "1.3.5",
+    "react-native-fs": "^2.20.0",
     "theme-ui": "^0.14.7",
     "web3": "^1.7.5",
     "web3uikit": "0.0.133"

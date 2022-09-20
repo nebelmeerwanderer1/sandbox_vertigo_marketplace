@@ -18,11 +18,11 @@ export default function Header() {
                 <Link href="/">
                     <a className="mr-4 p-6">Home</a>
                 </Link>
-                <Link href="/sell-nft">
-                    <a className="mr-4 p-6">Sell NFT</a>
+                <Link href="/mint-customUri">
+                    <a className="mr-4 p-6">Manage your inheritance NFTs</a>
                 </Link>
-                <Link href="/mint-nft">
-                    <a className="mr-4 p-6">Mint NFT</a>
+                <Link href="/mint-basicnft">
+                    <a className="mr-4 p-6">Manage your basic NFTs</a>
                 </Link>
                 <div className="ml-auto py-2 px-4">
                     <ConnectButton moralisAuth={false} />
