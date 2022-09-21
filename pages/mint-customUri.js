@@ -12,7 +12,7 @@ import NFTBox from "../components/NFTBox-generic"
 
 
 import contractABI from "../constants/customUri.json"
-const contractAddress = "0x8328452AFD2e0AD89C53923AFA6043a3f3dc3f65";
+const contractAddress = "0x2AAEE7DC30dcF135c8cAfC4aADd9D638c1eEA89A";
 
 export default function Home() {
     const { chainId, account, isWeb3Enabled } = useMoralis()

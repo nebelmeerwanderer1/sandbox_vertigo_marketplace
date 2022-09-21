@@ -79,6 +79,12 @@
                 "internalType": "address",
                 "name": "owner",
                 "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
             }
         ],
         "name": "CreatedNFT",
@@ -98,6 +104,12 @@
                 "internalType": "address",
                 "name": "owner",
                 "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
             }
         ],
         "name": "CurrentOwner",
@@ -148,6 +160,12 @@
                 "internalType": "address",
                 "name": "owner",
                 "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
             }
         ],
         "name": "UpdatedTokenUri",
