@@ -135,7 +135,7 @@ export default function Home() {
                             })
                            
                         )
-                    ) : ( <div>frfrffr </div> )
+                    ) : ( <div></div> )
                 }
                 </div>      
         </div>            
