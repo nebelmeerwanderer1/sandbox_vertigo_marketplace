@@ -253,7 +253,7 @@ export default function Home() {
                 <div className=" flex-wrap mr-5 mt-10  bg-slate-100">
                 <div className={styles.container}>
                 <p id="status" className={styles.ddescription}>
-                {/* {status} */}
+                    {/* {status} */}
                 </p>
                 <Form 
                     data={[
