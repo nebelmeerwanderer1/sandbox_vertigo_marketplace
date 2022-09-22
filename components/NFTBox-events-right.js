@@ -31,6 +31,10 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
     const hideModal = () => setShowModal(false)
     const dispatch = useNotification()
 
+        
+    const date = new Date(timestamp*1000)
+    const GMTtimestamp = date.toGMTString()
+
     // const { runContractFunction: getTokenURI } = useWeb3Contract({
     //     abi: contractABI,
     //     contractAddress: nftAddress,
@@ -124,7 +128,7 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
                                     <div className="font-bold  "> Token Id: {tokenId} </div>
                                     <div className="italic"> Event: </div>
                                     <div className="ml-5"> type : {type} </div>
-                                    <div className="ml-5"> time : {timestamp} </div>                                    
+                                    <div className="ml-5"> time : {GMTtimestamp}</div>                                    
                                     <div className="italic"> Ownership change (if transfer event) :  </div>
                                     <div className="ml-5"> owner : {owner} </div>
                                     <div className="ml-5"> new owner : {newOwner} </div>

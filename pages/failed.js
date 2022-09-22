@@ -8,7 +8,7 @@ import nftMarketplaceAbi from "../constants/NftMarketplace.json"
 import networkMapping from "../constants/networkMapping.json"
 import GET_ACTIVE_ITEMS from "../constants/subgraphQueries"
 import GET_EVENTS from "../constants/event_subgraphQueries"
-import GET_TOKEN_EVENTS from "../constants/tokenEvent_subgraphQueries"
+//import GET_TOKEN_EVENTS from "../constants/tokenEvent_subgraphQueries"
 import { listNftsForOwner } from "../components/interaction.js"
 import NFTBox from "../components/NFTBox-events-left"
 import NFTEventBox from "../components/NFTBox-events-right"
@@ -72,25 +72,31 @@ export default function Home() {
     
         }
 
+    // related to search on the right hand side
+
+    // const onEventSearch = async (data) => { 
+        
+    const { loading, error, data: listedEvents } = useQuery(GET_EVENTS, {context: {clientName: 'endpoint2'}})       
+
+    console.log(`listedevents: ${JSON.stringify(listedEvents)}`)
+ 
+
+
+
+      
+    
     // related to displaying the right hand side ----------------
 
+              
+
+    //
     
-    async function onEventSearch(data) {
-
-    setEventList(data.data[0].inputResult)
-
-    }
 
 
 
-    //const tokenId = "1"
 
-    const { loading, error, data: listedEvents } = useQuery(GET_TOKEN_EVENTS, {variables: { tokenId : eventList }, context: {clientName: 'endpoint2'}})           
 
-    //console.log(`listedevents: ${JSON.stringify(listedEvents)}`)   
 
-    
-    
     // the return --------------------------------------------
     
     return (
@@ -102,7 +108,10 @@ export default function Home() {
                 <div>
                     <h1 className="text-black text-xl ml-5 mt-5 mb-5">The data of your NFTs in overview</h1>
                 </div>               
-                {isWeb3Enabled ?  ( 
+                {isWeb3Enabled ? (
+                    loading ? (
+                        <div>Loading...</div>
+                    ) : ( 
                             nftList.ownedNfts?.map((nft) => {
                             const { tokenId, contract, price } = nft
                             return (
@@ -117,16 +126,17 @@ export default function Home() {
                                 />
                                 )
                             })                                                                            
-                        ): ( <div> </div> )}
+                        )
+                ) : ( <div> </div> )}
                 </div>  
 
-                <div className=" flex-wrap mr-10 mt-10 ml-5  bg-slate-100">
-                    <div className={styles.container}>
+            <div className=" flex-wrap mr-10 mt-10 ml-5  bg-slate-100">
+                <div className={styles.container}>
                     <div>
                     <h1 className="text-black text-xl ml-5 mt-5 mb-5">Check the history of an NFT</h1>
-                    </div>
+                    </div>  
                     <Form 
-                    data={[
+                    formdata={[
                     {
                         name: "Token Id #",
                         type: "number",
@@ -139,18 +149,18 @@ export default function Home() {
                     },
                 ]}
                 title=""
-                id="Search Form"
-                onSubmit={onEventSearch}                             
-                    />  
-                    </div>
-                    <p> <br/>  </p>
+                id="Search Form" 
+                            
+                    />
+                </div>
+                <p> <br/>  </p>
 
-                <div className={styles.container2}>               
+                <div className={styles.container2}>
                 {isWeb3Enabled ? (
-                    loading ? (
+                    loading || !listedEvents ? (
                         <div>Loading...</div>
                     ) : ( 
-                            listedEvents?.eventOccurrences.map((event) => {
+                            listedEvents.eventOccurrences.map((event) => {
                             console.log(event)
                             const { type, timestamp, tokenId, tokenURI, owner, newOwner, id } = event
                             return (
@@ -170,8 +180,8 @@ export default function Home() {
                     ) : ( <div></div> )
                 }
                 </div>
-
-            </div>
+                
+            </div>      
         </div>            
     </div>
     )
