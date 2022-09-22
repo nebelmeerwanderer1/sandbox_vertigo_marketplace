@@ -4,12 +4,27 @@ import { MoralisProvider } from "react-moralis"
 import Header from "../components/Header"
 import Head from "next/head"
 import { NotificationProvider } from "web3uikit"
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
+import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client"
 
-const client = new ApolloClient({
-    cache: new InMemoryCache(),
+const endpoint1 = new HttpLink({    
     uri: "https://api.studio.thegraph.com/query/33778/nft-marketplace-v1/v0.0.1",
 })
+
+const endpoint2 = new HttpLink({    
+    uri: "https://api.studio.thegraph.com/query/33778/inheritance-nfts/v0.0.8",
+})
+
+const client = new ApolloClient({
+    link: ApolloLink.split(
+        operation => operation.getContext().clientName === 'endpoint2',
+        endpoint2, //if above 
+        endpoint1
+    ),
+    cache: new InMemoryCache(),
+})
+
+
+
 
 function MyApp({ Component, pageProps }) {
     return (

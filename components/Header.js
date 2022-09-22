@@ -16,13 +16,16 @@ export default function Header() {
             <h1 className="py-4 px-4 font-bold text-3xl"> NFT Marketplace</h1>
             <div className="flex flex-row items-center">
                 <Link href="/">
-                    <a className="mr-4 p-6">Home</a>
+                    <a className="mr-4 p-6">start / buy</a>
                 </Link>
                 <Link href="/mint-customUri">
-                    <a className="mr-4 p-6">Manage your inheritance NFTs</a>
+                    <a className="mr-4 p-6">mint / update / sell</a>
+                </Link>
+                <Link href="/events-customUri">
+                    <a className="mr-4 p-6">check history</a>
                 </Link>
                 <Link href="/mint-basicnft">
-                    <a className="mr-4 p-6">Manage your basic NFTs</a>
+                    <a className="mr-4 p-6">(basic NFTs)</a>
                 </Link>
                 <div className="ml-auto py-2 px-4">
                     <ConnectButton moralisAuth={false} />

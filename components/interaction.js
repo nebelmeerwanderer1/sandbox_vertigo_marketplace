@@ -13,11 +13,12 @@ import { ethers} from "ethers"
 
     export const listNftsForOwner = async (owner, contractAddress) => {
         console.log(`owner in listNftsforOwner: ${owner}`)
+        console.log(`contract address in listNftsforOwner: ${contractAddress}`)
     const response = await alchemy.nft.getNftsForOwner(owner, { 
        contractAddresses: [contractAddress],
         })
     const ownedList = JSON.stringify(response, null, 2)
-    // console.log(ownedList)
+    //console.log(ownedList)
     return ownedList
     }
 
