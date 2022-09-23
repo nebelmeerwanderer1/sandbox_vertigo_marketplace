@@ -11,7 +11,7 @@ const endpoint1 = new HttpLink({
 })
 
 const endpoint2 = new HttpLink({    
-    uri: "https://api.studio.thegraph.com/query/33778/inheritance-nfts/v0.0.8",
+    uri: "https://api.studio.thegraph.com/query/33778/inheritance-nfts/v0.0.10",
 })
 
 const client = new ApolloClient({

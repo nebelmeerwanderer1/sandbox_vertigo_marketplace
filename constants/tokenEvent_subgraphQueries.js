@@ -2,11 +2,12 @@ import { gql } from "@apollo/client"
 
 const GET_TOKEN_EVENTS = gql`
     query MyEvents($tokenId: BigInt) {
-        eventOccurrences(where : { tokenId : $tokenId}) {
+        eventOccurrences(orderBy: timestamp, where : { tokenId : $tokenId}) {
             id
             imageURI
             newOwner
             owner
+            operator    
             timestamp
             tokenId
             tokenURI
