@@ -265,6 +265,69 @@ export default function Home() {
         return txhash
     }
 
+
+
+    // related to transfer NFT ------------------------------------
+
+    const transfer = async (data) => {
+
+    if (!isWeb3Enabled) {
+        setUpdatestatus("Connect your wallet")
+        return
+    }
+    
+    
+    //console.log(`url: ${JSON.stringify(data)}`)    
+
+    const info = {
+      tokenId: data.data[0].inputResult,
+      to: data.data[1].inputResult,
+    }   
+    
+        
+    //sign transaction via Metamask
+    try {
+        const txHash = await transferNFT(info.tokenId, info.to)
+        console.log(`freerfer: ${txHash.hash}`)
+        setUpdatestatus("✅ transferred ")  
+             
+    } catch (error) {
+        setUpdatestatus("😥 Something went wrong: " + error.message)
+        //setTimeout(location.reload(), 3000)
+        return        
+    }
+    };
+    
+    async function transferNFT(tokenId, to) {
+        console.log("Ok! Now time to transfer")
+        console.log(tokenId)
+        console.log(to)
+        
+        const transferNFT = {
+            abi: contractABI,
+            contractAddress: contractAddress,
+            functionName: "safeTransferFrom(address,address,uint256)",
+            gasLimit: 150000,
+            params: {                
+                from: account,
+                to: to,
+                tokenId: tokenId,                
+            },
+        }
+
+        const txhash = await runContractFunction({
+            params: transferNFT,
+            onError: (error) => console.log(error),
+        })
+        return txhash
+    }
+
+
+
+
+
+
+
     // when to trigger functions -----------------------------
 
     useEffect(() => {
@@ -394,7 +457,8 @@ export default function Home() {
                 ]}
                 title="Mint your NFT!"
                 id="Mint Form" 
-                onSubmit={onMintPressed}             
+                onSubmit={onMintPressed}
+                customFooter={<Button type="submit" text="Submit" />}              
                 />
                 <p id="mintstatus" className={styles.ddescription}>
                 {mintstatus}
@@ -444,7 +508,8 @@ export default function Home() {
                 ]}
                 title="Update your NFT!"
                 id="Update Form" 
-                onSubmit={onUpdatePressed}             
+                onSubmit={onUpdatePressed}
+                customFooter={<Button type="submit" text="Submit" />}              
                 />
                 <p id="updatestatus" className={styles.ddescription}>
                     {updatestatus}
@@ -470,6 +535,9 @@ export default function Home() {
                     {
                         name: "Price (in ETH)",
                         type: "number",
+                        validation: {
+                            required: true
+                            },
                         inputWidth: "100%",
                         value: "",
                         key: "price",
@@ -477,6 +545,38 @@ export default function Home() {
                 ]}
                 title="Sell your NFT!"
                 id="Main Form"
+                customFooter={<Button type="submit" text="Submit" />} 
+                />
+                <p id="mintstatus" className={styles.ddescription}>
+                
+                </p>
+                <Form
+                onSubmit={transfer}
+                data={[
+                    {
+                        name: "Token ID",
+                        type: "number",
+                        inputWidth: "100%",
+                        validation: {
+                            required: true
+                            },
+                        value: "",
+                        key: "tokenId",
+                    },
+                    {
+                        name: "Recipient Address",
+                        type: "text",
+                        inputWidth: "100%",
+                        validation: {
+                            required: true
+                            },
+                        value: "",
+                        key: "recipient",
+                    },
+                ]}
+                title="Transfer your NFT!"
+                id="Main Form"
+                customFooter={<Button type="submit" text="Submit" />} 
                 />
                 <p id="mintstatus" className={styles.ddescription}>
                 
@@ -512,6 +612,7 @@ export default function Home() {
 
                 title="Withdraw your NFT marketplace balance!"
                 id="Proceeds Form"
+                customFooter={<Button type="submit" text="Submit" />} 
                 />            
                 <div> 
                 <p className={styles.dddescription}>Total: {proceeds} proceeds</p>

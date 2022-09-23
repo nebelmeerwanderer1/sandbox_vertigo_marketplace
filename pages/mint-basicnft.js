@@ -298,7 +298,8 @@ export default function Home() {
                 ]}
                 title="Mint your NFT!"
                 id="Mint Form" 
-                onSubmit={onMintPressed}             
+                onSubmit={onMintPressed} 
+                customFooter={<Button type="submit" text="Submit" />}             
                 />
                 <p id="mintstatus" className={styles.ddescription}>
                 {mintstatus}
@@ -331,6 +332,7 @@ export default function Home() {
                 ]}
                 title="Sell your NFT!"
                 id="Main Form"
+                customFooter={<Button type="submit" text="Submit" />} 
                 />
                 <p id="mintstatus" className={styles.ddescription}>
                 
@@ -366,6 +368,7 @@ export default function Home() {
 
                 title="Withdraw your NFT marketplace balance!"
                 id="Proceeds Form"
+                customFooter={<Button type="submit" text="Submit" />} 
                 />            
                 <div> 
                 <p className={styles.dddescription}>Total: {proceeds} proceeds</p>

@@ -140,7 +140,8 @@ export default function Home() {
                 ]}
                 title=""
                 id="Search Form"
-                onSubmit={onEventSearch}                             
+                onSubmit={onEventSearch}
+                customFooter={<Button type="submit" text="Submit" />}                             
                     />  
                     </div>
                     <p> <br/>  </p>
