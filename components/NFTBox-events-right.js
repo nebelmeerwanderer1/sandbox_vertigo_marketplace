@@ -21,7 +21,7 @@ const truncateStr = (fullStr, strLen) => {
     )
 }
 
-export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner, newOwner, id }) {
+export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner, newOwner, operator, id }) {
     const { isWeb3Enabled, account } = useMoralis()
     const [imageURI, setImageURI] = useState("")
     const [tokenName, setTokenName] = useState("")
@@ -129,9 +129,10 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
                                     <div className="italic"> Event: </div>
                                     <div className="ml-5"> type : {type} </div>
                                     <div className="ml-5"> time : {GMTtimestamp}</div>                                    
-                                    <div className="italic"> Ownership change (if transfer event) :  </div>
+                                    <div className="italic"> Ownership change (if transfer event) or new operator:  </div>
                                     <div className="ml-5"> owner : {owner} </div>
                                     <div className="ml-5"> new owner : {newOwner} </div>
+                                    <div className="ml-5"> operator : {operator} </div>
                                     <div className="italic"> Content change (if create or update event) : </div>
                                     <div className="ml-5"> token URI : {tokenURI}  </div>
                                     <div className="ml-10"> name : {tokenName} </div>

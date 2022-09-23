@@ -153,7 +153,7 @@ export default function Home() {
                     ) : ( 
                             listedEvents?.eventOccurrences.map((event) => {
                             console.log(event)
-                            const { type, timestamp, tokenId, tokenURI, owner, newOwner, id } = event
+                            const { type, timestamp, tokenId, tokenURI, owner, newOwner, operator, id } = event
                             return (
                                 <NFTEventBox
                                     type={type}
@@ -162,6 +162,7 @@ export default function Home() {
                                     tokenURI={tokenURI}
                                     owner={owner}
                                     newOwner={newOwner}
+                                    operator={operator}
                                     id={id}
                                 />
                                )
