@@ -94,7 +94,7 @@ const DropZone = ({ data, dispatch }) => {
     redirect: 'follow'
     };  
         
-    const response = await fetch("http://178.18.241.108:4000/upload", requestOptions)
+    const response = await fetch("https://178.18.241.108/upload", requestOptions)
       .then(response => response.json())
       
       console.log(response.profile_url) 
