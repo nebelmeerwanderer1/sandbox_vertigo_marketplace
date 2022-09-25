@@ -10,6 +10,11 @@ import GET_ACTIVE_ITEMS from "../constants/subgraphQueries"
 import { listNftsForOwner } from "../components/interaction.js"
 import NFTBox from "../components/NFTBox-generic"
 
+//related to dropzone
+import React, { useReducer } from "react";
+import Head from "next/head";
+import DropZone from "../components/DropZone";
+
 
 import contractABI from "../constants/customUri.json"
 const contractAddress = "0x2AAEE7DC30dcF135c8cAfC4aADd9D638c1eEA89A";
@@ -323,6 +328,33 @@ export default function Home() {
     }
 
 
+    // related to dropzone functionality -------------------------
+
+    const reducer = (state, action) => {
+    switch (action.type) {
+      case "SET_IN_DROP_ZONE":
+        return { ...state, inDropZone: action.inDropZone };
+      case "ADD_FILE_TO_LIST":
+        return { ...state, fileList: state.fileList.concat(action.files) };
+      default:
+        return state;
+    }
+  };
+
+     // destructuring state and dispatch, initializing fileList to empty array
+     const [data, dispatch2] = useReducer(reducer, {
+      inDropZone: false,
+        fileList: [],
+      });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -412,7 +444,18 @@ export default function Home() {
                 <p id="status" className={styles.ddescription}>
                 {/* {status} */}
                 </p>
+
+                <h1 className="py-4 px-4 font-bold text-center text-xl text-slate-500"> Here you upload your asset to the InterPlanetary File System (IPFS)  - and then copy address to the forms below</h1> 
+                {/* Pass state data and dispatch to the DropZone component */}
+                <DropZone data={data} dispatch={dispatch2} />
+                <p>
+                     <br></br> 
+                </p>
+
                 <Form 
+
+
+
                     data={[
                     {
                         name: "Link to asset: E.g. https://gateway.pinata.cloud/ipfs/<hash>",

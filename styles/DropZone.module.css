@@ -1,0 +1,62 @@
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.active {
+  border: dashed 3px dodgerblue;
+}
+
+.uploadMessage h3 {
+  margin-top: 1rem;
+}
+
+.files {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.files+label {
+  margin-top: 1rem;
+  background-color: rgb(107 114 128);
+  border-radius: 4rem;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  text-align: center;
+  user-select: none;
+}
+
+.files+label:focus,
+.files+label:hover {
+  background-color: rgb(107 114 128);
+  color: #fff;
+}
+
+.files+label:focus {
+  outline: 1px dotted #fff;
+}
+
+.uploadBtn {
+  width: auto;
+  color: white;
+  margin: 0.5rem;
+  background-color: rgb(107 114 128);
+  border-radius: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  text-align: center;
+}
