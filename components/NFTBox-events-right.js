@@ -114,15 +114,16 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
             <div>
                 
                     <div>
-                        <UpdateListingModal
+                        {/* <UpdateListingModal
                             
-                            isVisible={showModal}
+                            //isVisible={showModal}
                             tokenId={tokenId}
                             // marketplaceAddress={nftAddress}
                             // nftAddress={nftAddress}
                             onClose={hideModal}
-                        />
-                        <Card>
+                        /> */}
+                                               
+                            <div className="p-2 bg-slate-300 text-gray-600">
                             <div className="p-2 bg-white text-gray-600">
                                 <div className="flex flex-col items-left gap-2 text-xs">
                                     <div className="font-bold  "> Token Id: {tokenId} </div>
@@ -137,10 +138,13 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
                                     <div className="ml-5"> token URI : {tokenURI}  </div>
                                     <div className="ml-10"> name : {tokenName} </div>
                                     <div className="ml-10"> description : {tokenDescription} </div>
-                                    <div className="ml-10"> ImageURI : {imageURI} </div>                                    
+                                    <div className="ml-10"> ImageURI: </div>                                    
+                                    <a className="ml-10 underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href={imageURI} target="popup"> {imageURI} </a>                                    
+                                    
                                 </div>
                             </div>
-                        </Card>
+                            </div>
+                        
                     </div>
                 
             </div>

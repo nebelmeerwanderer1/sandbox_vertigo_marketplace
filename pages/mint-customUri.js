@@ -15,6 +15,8 @@ import React, { useReducer } from "react";
 import Head from "next/head";
 import DropZone from "../components/DropZone";
 
+import Landing from "../components/dragndropfiles/Landing"
+
 
 import contractABI from "../constants/customUri.json"
 const contractAddress = "0x2AAEE7DC30dcF135c8cAfC4aADd9D638c1eEA89A";
@@ -445,9 +447,12 @@ export default function Home() {
                 {/* {status} */}
                 </p>
 
-                <h1 className="py-4 px-4 font-bold text-center text-xl text-slate-500"> Here you upload your asset to the InterPlanetary File System (IPFS)  - and then copy address to the forms below</h1> 
+                
                 {/* Pass state data and dispatch to the DropZone component */}
-                <DropZone data={data} dispatch={dispatch2} />
+                
+                <Landing />
+
+                {/* <DropZone data={data} dispatch={dispatch2} /> */}
                 <p>
                      <br></br> 
                 </p>
