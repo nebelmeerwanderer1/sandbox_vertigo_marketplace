@@ -209,16 +209,19 @@ export const Notarize: FunctionComponent<Props> = ({ endpoint }) => {
                   </>
                 )}
                 {!res.success && (
-                  <Typography variant='caption'>
-                    ❌ {res.name}: {res.profile_url}
-                  </Typography>
+                  <>
+                    <Typography variant='caption'>
+                      ❌ {res.name}: {res.profile_url}
+                    </Typography>
+
+                    <ButtonContainer>
+                      <Button
+                        onClick={reset}
+                        text="Reset"
+                      />
+                    </ButtonContainer>
+                  </>
                 )}
-                <ButtonContainer>
-                  <Button
-                    onClick={reset}
-                    text="Reset"
-                  />
-                </ButtonContainer>
               </div>
             ))}
         </Panel>
