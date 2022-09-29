@@ -8,6 +8,7 @@ import { ethers } from "ethers"
 import UpdateListingModal from "./UpdateListingModal"
 
 
+
 const truncateStr = (fullStr, strLen) => {
     if (fullStr.length <= strLen) return fullStr
 
@@ -109,6 +110,11 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
         })
     }
 
+    function GraphCMSImageLoader({ src, width }) {
+        const relativeSrc = (src) => src.split("/").pop();
+        return `https://media.graphcms.com/resize=width:${width}/${relativeSrc(src)}`;
+        }
+
     return (
         <div>
             <div>
@@ -123,9 +129,10 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
                             onClose={hideModal}
                         /> */}
                                                
-                            <div className="p-2 bg-slate-300 text-gray-600">
-                            <div className="p-2 bg-white text-gray-600">
-                                <div className="flex flex-col items-left gap-2 text-xs">
+                            <div className="grid grid-cols-2 p-2">
+                                <div className="p-2 bg-white text-gray-600">
+                                    <div className="flex flex-col items-left gap-2 text-xs">
+
                                     <div className="font-bold  "> Token Id: {tokenId} </div>
                                     <div className="italic"> Event: </div>
                                     <div className="ml-5"> type : {type} </div>
@@ -141,8 +148,24 @@ export default function NFTEventBox({ type, timestamp, tokenId, tokenURI, owner,
                                     <div className="ml-10"> ImageURI: </div>                                    
                                     <a className="ml-10 underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href={imageURI} target="popup"> {imageURI} </a>                                    
                                     
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div className="p-3 bg-white text-gray-600">
+                                    <container>
+                                    <Image
+                                        //loader={GraphCMSImageLoader}
+                                        src={imageURI}
+                                        alt="No ImageURI in this event"
+                                        width="50px"
+                                        height="50px"
+                                        layout="responsive"
+                                        objectFit="contain" 
+                                        />
+                                    </container>
+                                
+                                </div>
+                           
                             </div>
                         
                     </div>
