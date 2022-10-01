@@ -22,8 +22,8 @@ export default function Home() {
           <div class="container px-5 py-10 mx-auto">
           <div class="flex flex-col text-center w-full mb-10">
             <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">WHAT IS HAPPENING HERE</h2>
-            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Non-Fungible Token Factory</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">What happens beneath the hood when you mint Non-Fungible Tokens (NFTs), list for sale and buy from others.</p>
+            <h1 class="sm:text-4xl text-2xl font-medium title-font mb-4 text-gray-900">The Non-Fungible Token Factory</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Mint Non-Fungible Tokens (NFTs), list for sale and buy from others.</p>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
           </div>
 

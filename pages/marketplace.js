@@ -6,14 +6,34 @@ import GET_ACTIVE_ITEMS from "../constants/subgraphQueries"
 import { useQuery } from "@apollo/client"
 import { jsx, Container, Box, Grid, Text, Heading } from "theme-ui";
 import TextFeature from "../components/text-feature";
+import { useState, useEffect } from "react"
 
 
 export default function Home() {
-    const { isWeb3Enabled, chainId } = useMoralis()
+    const { isWeb3Enabled, chainId, account } = useMoralis()
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
 
     const { loading, error, data: listedNfts } = useQuery(GET_ACTIVE_ITEMS, {context: {clientName: 'endpoint1'}})
+
+    const [status, setStatus] = useState("")
+    const [wallet, setWallet] = useState(" ")
+
+    function addWalletListener() {
+        if (isWeb3Enabled) {
+        setWallet(account);
+        setStatus("Your wallet is connected. you are ready");
+        } else {
+        setWallet("");
+        setStatus("🦊 Connect to Metamask using the top right button");
+        }
+    } 
+
+    useEffect(() => {
+        addWalletListener()
+                          
+        }
+    , [account, isWeb3Enabled, chainId])
 
     return (
       <section class="text-gray-600 body-font">
@@ -81,33 +101,7 @@ export default function Home() {
                      <div>Web3 Currently Not Enabled - it sure ain't</div>
                 )} */}
             </div>
-            <div className=" flex-wrap mt-10 mr-10 ml-10 bg-slate-100">
-              
-              <h1 className="py-4 px-4 font-bold text-xl ">what is actually happening here?</h1>
-
-              <h1 className="py-4 px-4 ">this web site is designed to explain what happens beneath the hood when you mint nfts, list for sale and buy nft from others. </h1>
-
-              <h1 className="py-4 px-4 ">it is genuinely blockchain based if someone asks: it runs on the ethereum's goerli testnet and the nfts follow the ERC-721 standard</h1>
-              
-              <h1 className="py-4 px-4 ">to the left you have nfts that exist on the blockchain and are listed for sale on the marketplace </h1>
-
-              <h1 className="py-4 px-4 ">creating an nft is called 'minting'. that means activating a smart contract that can create a unique token - the smart contract maintains a list of all the nfts and owner accounts</h1>
-              
-              <h1 className="py-4 px-4 ">so before you can mint an nft you need an account. download a wallet to get an account. For instance metamask.</h1>
-              
-              <h1 className="py-4 px-4 ">you will also need a bit of ETH - since this is a testnet it is really just funny money. you only need real ETH if it is on ethereum mainnet</h1>
-              
-              <h1 className="py-4 px-4 ">you can get some goerli eth here : https://goerli-faucet.pk910.de/ . but get an account first. </h1>
-                 
-              
-              
-              
-              
-              
-              
-              
-              
-            </div>
+           
 
             </div>
             
