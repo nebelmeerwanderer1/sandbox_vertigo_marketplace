@@ -12,25 +12,30 @@ import styles from "../styles/Home.module.css"
 
 export default function Header() {
     return (
-        <nav className="text-white bg-gray-500 bg-[url('../assets/patternBG.png')] p-5 border-b-2 flex flex-row justify-between items-center" > 
-            <h1 className="py-4 px-4 font-bold text-3xl"> NFT Marketplace</h1>
+        <nav className="text-white bg-gray-500 bg-[url('../assets/patternBG.png')] border-b-2 flex flex-row justify-between items-center" > 
             <div className="flex flex-row items-center">
                 <Link href="/">
-                    <a className="mr-4 p-6">start / buy</a>
+                    <a className="mr-4 p-6">Home</a>
                 </Link>
                 <Link href="/mint-customUri">
-                    <a className="mr-4 p-6">mint / update / sell</a>
+                    <a className="mr-4 p-6">Create NFTs</a>
+                </Link>
+                <Link href="/interact-customUri">
+                    <a className="mr-4 p-6">Interact with NFTs</a>
                 </Link>
                 <Link href="/events-customUri">
-                    <a className="mr-4 p-6">check history</a>
+                    <a className="mr-4 p-6">Check events</a>
+                </Link>                
+                <Link href="/marketplace">
+                    <a className="mr-4 p-6">Buy and sell NFTs</a>
                 </Link>
                 <Link href="/mint-basicnft">
                     <a className="mr-4 p-6">(basic NFTs)</a>
-                </Link>
-                <div className="ml-auto py-2 px-4">
+                </Link>                
+            </div>
+            <div className="ml-auto py-2 px-4 items-end">
                     <ConnectButton moralisAuth={false} />
                 </div>
-            </div>
          </nav> 
         
     )

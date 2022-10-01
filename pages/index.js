@@ -1,4 +1,5 @@
 //import styles from "../styles/Home.module.css"
+import { Link } from "theme-ui"
 import { useMoralisQuery, useMoralis } from "react-moralis"
 import NFTBox from "../components/NFTBox-index"
 import networkMapping from "../constants/networkMapping.json"
@@ -17,62 +18,71 @@ export default function Home() {
 
     return (
         <div className="container mx-auto">
-            <h1 className="py-4 px-4 font-bold text-2xl ">Recently Listed for sale</h1>
-            <div className="grid grid-cols-2">
-            <div className="grid grid-cols-2 flex-wrap mt-10 ml-5">
-                {/* {isWeb3Enabled ? ( */}
-                    {loading || !listedNfts ? (
-                        <div>Loading...</div>
-                    ) : (
-                        listedNfts.activeItems.map((nft) => {
-                            console.log(nft)
-                            const { price, nftAddress, tokenId, seller } = nft
-                            return (
-                                <NFTBox
-                                    price={price}
-                                    nftAddress={nftAddress}
-                                    tokenId={tokenId}
-                                    marketplaceAddress={marketplaceAddress}
-                                    seller={seller}
-                                    key={`${nftAddress}${tokenId}`}
-                                />
-                            )
-                        })
-                    )}
-                {/* ) : (
-                     <div>Web3 Currently Not Enabled - it sure ain't</div>
-                )} */}
-            </div>
-            <div className=" flex-wrap mt-10 mr-10 ml-10 bg-slate-100">
-              <h1 className="py-4 px-4 font-bold text-xl ">what is actually happening here?</h1>
+      <section class="text-gray-600 body-font">
+          <div class="container px-5 py-10 mx-auto">
+          <div class="flex flex-col text-center w-full mb-10">
+            <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">WHAT IS HAPPENING HERE</h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Non-Fungible Token Factory</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">What happens beneath the hood when you mint Non-Fungible Tokens (NFTs), list for sale and buy from others.</p>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
+          </div>
 
-              <h1 className="py-4 px-4 ">this web site is designed to explain what happens beneath the hood when you mint nfts, list for sale and buy nft from others. </h1>
 
-              <h1 className="py-4 px-4 ">it is genuinely blockchain based if someone asks: it runs on the ethereum's goerli testnet and the nfts follow the ERC-721 standard</h1>
-              
-              <h1 className="py-4 px-4 ">to the left you have nfts that exist on the blockchain and are listed for sale on the marketplace </h1>
-
-              <h1 className="py-4 px-4 ">creating an nft is called 'minting'. that means activating a smart contract that can create a unique token - the smart contract maintains a list of all the nfts and owner accounts</h1>
-              
-              <h1 className="py-4 px-4 ">so before you can mint an nft you need an account. download a wallet to get an account. For instance metamask.</h1>
-              
-              <h1 className="py-4 px-4 ">you will also need a bit of ETH - since this is a testnet it is really just funny money. you only need real ETH if it is on ethereum mainnet</h1>
-              
-              <h1 className="py-4 px-4 ">you can get some goerli eth here : https://goerli-faucet.pk910.de/ . but get an account first. </h1>
-                 
-              
-              
-              
-              
-              
-              
-              
+          <div class="flex flex-wrap">            
+            <div class="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2>
+              <p class="leading-relaxed text-base mb-4">Experience creating and interacting with real NFTs. Use the simple experience as fuel for innovating and qualifying business potential.</p>
               
             </div>
+            <div class="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Industry standard smart contracts</h2>
+              <p class="leading-relaxed text-base mb-4">NFTs are defined by smart contracts that run on the blockchain. The capabilities for an NFT collection is defined by a smart contract.</p>
+              
+            </div>  
+            <div class="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Genuine blockchain - connected to Ethereum</h2>
+              <p class="leading-relaxed text-base mb-4">If someone asks: The contracts called from this site run on Ethereum's goerli testnet and the NFTs follow the ERC-721 standard.</p>
+              
+            </div>                
+          </div>
 
+          <div class="flex flex-wrap">
+            <div class="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">1st step: Create NFTs</h2>
+              <p class="leading-relaxed text-base">Start by creating your NFT. An NFT is a defined data structure with a file, a name and a description.</p>
+              <p class="leading-relaxed text-base mb-4">Consider whether it should designate something in the real work. E.g. a work of art, a parcel or even some real estate. </p>
+              <Link href="/preparations">
+              <a class="text-indigo-500 inline-flex items-center">Learn how to prepare for the best experience
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+              </Link>
             </div>
-            
-            
+            <div class="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">2nd Step: Interact with NFTs and check events</h2>
+              <p class="leading-relaxed text-base mb-4">The capabilities of a specific NFT is defined by the underlying contract which cannot be changed. It is good practice to visit the underlying contract before you mint or buy an NFT.</p>
+              <Link href="/smartcontracts">
+              <a class="text-indigo-500 inline-flex items-center">Learn why a smart contract is 'smart' but not smart
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+              </Link>
+            </div>
+            <div class="xl:w-1/3 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">3rd step: Buy and sell NFTs</h2>
+              <p class="leading-relaxed text-base mb-4">The marketplace on this site offering buy and sell functionality is a separate smart contract. It is a good sandbox for playing around but obviously not the big arena. However, because your NFTs follow industry standards there is really nothing stopping you from going to OpenSea. </p>
+              {/* <a class="text-indigo-500 inline-flex items-center">have a stroll on 
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a> */}
+            </div>                  
+          </div>
+            {/* <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> */}
+          </div>
+      </section>              
         </div>
     )
 }

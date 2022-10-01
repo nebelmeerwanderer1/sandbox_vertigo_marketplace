@@ -95,7 +95,7 @@ export default function Home() {
     
     return (
     <div className="container mx-auto">
-    <h1 className="py-4 px-4  bg-gray-500 text-white text-xl">{status}</h1>
+    <h1 className="py-2 px-4  bg-gray-500 text-white text-end">{status}</h1>
         <div className="grid grid-cols-2">
 
                 <div className="flex-wrap ml-10 mr-5 mt-10 bg-slate-100 "> 

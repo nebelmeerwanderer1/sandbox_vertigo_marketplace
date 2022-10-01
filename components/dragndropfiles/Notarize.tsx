@@ -233,8 +233,14 @@ export const Notarize: FunctionComponent<Props> = ({ endpoint }) => {
             onClick={notarizeFiles}
             text="Click to Upload"
           />
+          <Button
+            onClick={reset}
+            text="Reset"
+          />
         </ButtonContainer>
       )}
+      <a className="ml-10 underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href={"https://www.img2go.com/compress-image"} target="popup">Compress your image for free</a>
+
     </InputContainer>
   )
 }
