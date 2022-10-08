@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css"
+//import styles from "../styles/Home.module.css"
 import { Form, useNotification, Button, Tab } from "web3uikit"
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { ethers } from "ethers"
@@ -11,7 +11,7 @@ import { listNftsForOwner } from "../components/interaction.js"
 import NFTBox from "../components/NFTBox-generic"
 
 //related to dropzone
-import React, { useReducer } from "react";
+import { useReducer } from "react";
 import Head from "next/head";
 import DropZone from "../components/DropZone";
 
@@ -21,7 +21,46 @@ import Landing from "../components/dragndropfiles/Landing"
 import contractABI from "../constants/customUri.json"
 const contractAddress = "0x2AAEE7DC30dcF135c8cAfC4aADd9D638c1eEA89A";
 
-export default function Home() {
+// ---material kit imports -------------------
+
+//import React from "react";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+
+// @material-ui/icons
+
+// core components
+import Header from "../components/Header/Header.js";
+import Footer from "../components/Footer/Footer.js";
+import GridContainer from "../components/Grid/GridContainer.js";
+import GridItem from "../components/Grid/GridItem.js";
+//  import Button from "../components/CustomButtons/Button.js";
+import HeaderLinks from "../components/Header/HeaderLinks.js";
+import Parallax from "../components/Parallax/Parallax.js";
+
+import styles from "../styles/jss/nextjs-material-kit/pages/landingPage.js";
+
+// Sections for this page
+import ProductSection from "../pages-sections/interact-customURI-Sections/ProductSection.js";
+import StepsSection from "../pages-sections/mint-customURI-Sections/StepsSection.js";
+import WorkSection from "../pages-sections/LandingPage-Sections/WorkSection.js";
+
+const dashboardRoutes = [];
+const useStyles = makeStyles(styles);
+
+
+
+
+
+export default function Home(props) {
+    // ---------- material UI -------------
+    const classes = useStyles();
+    const { ...rest } = props;
+
+    //----------------functionality -----------------
+    
     const { chainId, account, isWeb3Enabled } = useMoralis()
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
@@ -412,195 +451,43 @@ export default function Home() {
     // the return --------------------------------------------
     
     return (
-     <section class="text-gray-600 body-font">
-        <div className="container mx-auto">
-
-        <h1 className="py-2 px-4  bg-gray-500 text-white text-end">{status}</h1>
-
-    <div class="flex flex-col text-center w-full mb-10">
-            <h2 class="text-xs text-indigo-500 tracking-widest mt-10 font-medium title-font mb-1">TIME TO BRING IT TO LIFE</h2>
-            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4  text-gray-900">Interacting with an NFT and checking events</h1>
-            {/* <p class="lg:w-2/3 mx-auto leading-relaxed text-base">What happens beneath the hood when you mint Non-Fungible Tokens (NFTs), list for sale and buy from others.</p>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p> */}
-          </div>
 
 
-          <div class="flex flex-wrap">            
-            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">Selling: Registers your NFT for sale on this site's marketplace</p>
-              
+    <div>
+        <Header
+            color="transparent"
+            routes={dashboardRoutes}
+            brand="HOME"
+            rightLinks={<HeaderLinks />}
+            fixed
+            changeColorOnScroll={{
+            height: 400,
+            color: "white"
+            }}
+            {...rest}
+        />
+      <Parallax filter responsive image="/img/bg3.jpg">
+        <div className={classes.container}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+              <h1 className={classes.title}>TIME TO BRING IT TO LIFE.</h1>
+              <h4>
+                Interact with an NFT and check events.  
+              </h4>
+              <br />              
+            </GridItem>            
+          </GridContainer>
+        </div>
+      </Parallax>
+
+        <div className={classNames(classes.main, classes.mainRaised)}>
+            <div className={classes.container}>
+                <ProductSection />         
             </div>
-            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">Transferring: Transfers the NFT to another account.</p>
-              
-            </div>
-            
-            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">Withdrawing proceeds: Withdraw to your account any income from sales activity on the marketplace</p>
-              
-            </div>
-            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">Checking events (next page): Fill in any Token Id and see the full history of the NFT since creation.</p>
-              
-            </div>
-                     
-          </div>   
-
-            <div className="grid grid-cols-2">
-                <div>
-                <h1 class="px-4 sm:text-xl text-2xl font-medium text-center title-font mt-10 text-gray-900">Your NFTs</h1>  
-                </div>
-                <div>
-                <h1 class="px-4 sm:text-xl text-2xl font-medium text-center title-font mt-10 text-gray-900">Sell and transfer forms</h1>    
-                </div>
-            </div>
-    
-        <div className="grid grid-cols-2">
-
-                <div className="flex-wrap ml-10 mr-10 mt-10">                
-                {isWeb3Enabled ? (
-                    loading ? (
-                        <div>Loading...</div>
-                    ) : (
-                        nftList.ownedNfts?.map((nft) => {
-                            const { tokenId, contract, price } = nft
-                            return (
-                                <NFTBox
-                                    price={price}
-                                    nftAddress={contract.address}
-                                    contractABI={contractABI}
-                                    tokenId={tokenId}
-                                    marketplaceAddress={marketplaceAddress}
-                                    seller={account}
-                                    key={`${contract.address}${tokenId}`}
-                                />
-                            )
-                        })
-                    )
-                ) : (
-                    <div> </div>
-                )}
-                </div>  
-
-                <div className=" flex-wrap mr-5 mt-10  bg-slate-100">
-                <div className={styles.container}>
-                <p id="status" className={styles.ddescription}>
-                {/* {status} */}
-                </p>
-                
-            
-                <Form
-                onSubmit={approveAndList}
-                data={[
-                    {
-                        name: "NFT Address",
-                        type: "text",
-                        inputWidth: "100%",
-                        value: "",
-                        key: "nftAddress",
-                    },
-                    {
-                        name: "Token ID",
-                        type: "number",
-                        inputWidth: "100%",
-                        value: "",
-                        key: "tokenId",
-                    },
-                    {
-                        name: "Price (in ETH)",
-                        type: "number",
-                        validation: {
-                            required: true
-                            },
-                        inputWidth: "100%",
-                        value: "",
-                        key: "price",
-                    },
-                ]}
-                title="Sell your NFT!"
-                id="Main Form"
-                customFooter={<Button type="submit" text="Submit" />} 
-                />
-                <p id="mintstatus" className={styles.ddescription}>
-                
-                </p>
-                <Form
-                onSubmit={transfer}
-                data={[
-                    {
-                        name: "Token ID",
-                        type: "number",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "tokenId",
-                    },
-                    {
-                        name: "Recipient Address",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "recipient",
-                    },
-                ]}
-                title="Transfer your NFT!"
-                id="Main Form"
-                customFooter={<Button type="submit" text="Submit" />} 
-                />
-                <p id="mintstatus" className={styles.ddescription}>
-                
-                </p>
-            
-                <Form
-                onSubmit={() => {
-                    {proceeds != "0" ? (
-                        runContractFunction({
-                            params: {
-                                abi: nftMarketplaceAbi,
-                                contractAddress: marketplaceAddress,
-                                functionName: "withdrawProceeds",
-                                params: {},
-                            },
-                            onError: (error) => console.log(error),
-                            onSuccess: handleWithdrawSuccess,
-                        })
-                    ): (
-                        <div>No proceeds detected</div>
-                    )
-                }}} 
-                data={[
-                    {
-                        name: "proceeds you want to withdraw",
-                        type: "text",
-                        inputWidth: "100%",
-                        value: proceeds,
-                        key: "proceeds",
-                    },
-
-                ]}
-
-                title="Withdraw your NFT marketplace balance!"
-                id="Proceeds Form"
-                customFooter={<Button type="submit" text="Submit" />} 
-                />            
-                <div> 
-                <p className={styles.dddescription}>Total: {proceeds} proceeds</p>
-                </div>
-            
-                </div>
-            </div>
-                   
-        </div>            
+        </div>
+      <Footer />
     </div>
-    </section>
+
     )
-}
+    }
+

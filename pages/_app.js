@@ -6,6 +6,20 @@ import Head from "next/head"
 import { NotificationProvider } from "web3uikit"
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client"
 
+//------------- material kit -------------------
+
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "next/app";
+//import Head from "next/head";
+import Router from "next/router";
+
+import PageChange from "../components/PageChange/PageChange.js";
+
+import "/styles/scss/nextjs-material-kit.scss?v=1.2.0";
+
+
+
 const endpoint1 = new HttpLink({    
     uri: "https://api.studio.thegraph.com/query/33778/nft-marketplace-v1/v0.0.1",
 })
@@ -26,9 +40,10 @@ const client = new ApolloClient({
 
 
 
-function MyApp({ Component, pageProps }) {
+function MyApp ({ Component, pageProps }) {
     return (
         <div>
+            <React.Fragment>
             <Head>
                 <title>NFT Marketplace</title>
                 <meta name="description" content="NFT Marketplace" />
@@ -37,11 +52,12 @@ function MyApp({ Component, pageProps }) {
             <MoralisProvider initializeOnMount={false}>
                 <ApolloProvider client={client}>
                     <NotificationProvider>
-                        <Header />
+                        {/* <Header /> */}
                         <Component {...pageProps} />
                     </NotificationProvider>
                 </ApolloProvider>
             </MoralisProvider>
+            </React.Fragment>
         </div>
     )
 }

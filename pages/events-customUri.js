@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css"
+//import styles from "../styles/Home.module.css"
 import { Form, useNotification, Button, Tab } from "web3uikit"
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { ethers } from "ethers"
@@ -16,7 +16,39 @@ import NFTEventBox from "../components/NFTBox-events-right"
 import contractABI from "../constants/customUri.json"
 const contractAddress = "0x2AAEE7DC30dcF135c8cAfC4aADd9D638c1eEA89A";
 
-export default function Home() {
+// ---material kit imports -------------------
+
+//import React from "react";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+
+// @material-ui/icons
+
+// core components
+import Header from "../components/Header/Header.js";
+import Footer from "../components/Footer/Footer.js";
+import GridContainer from "../components/Grid/GridContainer.js";
+import GridItem from "../components/Grid/GridItem.js";
+//  import Button from "../components/CustomButtons/Button.js";
+import HeaderLinks from "../components/Header/HeaderLinks.js";
+import Parallax from "../components/Parallax/Parallax.js";
+
+import styles from "../styles/jss/nextjs-material-kit/pages/landingPage.js";
+
+// Sections for this page
+import ProductSection from "../pages-sections/events-customUri-Sections/ProductSection.js";
+
+const dashboardRoutes = [];
+const useStyles = makeStyles(styles);
+
+export default function Home(props) {
+    // ---------- material UI -------------
+    const classes = useStyles();
+    const { ...rest } = props;
+
+    //----------------functionality -----------------
     const { chainId, account, isWeb3Enabled } = useMoralis()
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
@@ -94,94 +126,43 @@ export default function Home() {
     // the return --------------------------------------------
     
     return (
-    <div className="container mx-auto">
-    <h1 className="py-2 px-4  bg-gray-500 text-white text-end">{status}</h1>
-        <div className="grid grid-cols-2">
+        <div>
+        <Header
+            color="transparent"
+            routes={dashboardRoutes}
+            brand="HOME"
+            rightLinks={<HeaderLinks />}
+            fixed
+            changeColorOnScroll={{
+            height: 400,
+            color: "white"
+            }}
+            {...rest}
+        />
+      <Parallax filter responsive image="/img/bg3.jpg">
+        <div className={classes.container}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+              <h1 className={classes.title}>TIME TO CHECK HISTORY.</h1>
+              <h4>
+                Check the events in the history of an NFT. You can also check the NFTs owned by others.      
+              </h4>
+              <br />              
+            </GridItem>            
+          </GridContainer>
+        </div>
+      </Parallax>
 
-                <div className="flex-wrap ml-10 mr-5 mt-10 bg-slate-100 "> 
-                <div>
-                    <h1 className="text-black text-xl ml-5 mt-5 mb-5">The data of your NFTs in overview</h1>
-                </div>               
-                {isWeb3Enabled ?  ( 
-                            nftList.ownedNfts?.map((nft) => {
-                            const { tokenId, contract, price } = nft
-                            return (
-                                <NFTBox
-                                    price={price}
-                                    nftAddress={contract.address}
-                                    contractABI={contractABI}
-                                    tokenId={tokenId}
-                                    marketplaceAddress={marketplaceAddress}
-                                    seller={account}
-                                    key={`${contract.address}${tokenId}`}
-                                />
-                                )
-                            })                                                                            
-                        ): ( <div> </div> )}
-                </div>  
-
-                <div className=" flex-wrap mr-10 mt-10 ml-5  bg-slate-100">
-                    <div className={styles.container}>
-                    <div>
-                    <h1 className="text-black text-xl ml-5 mt-5 mb-5">Check the history of an NFT</h1>
-                    </div>
-                    <Form 
-                    data={[
-                    {
-                        name: "Token Id #",
-                        type: "number",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },                        
-                        value: "",
-                        key: "tokenid",
-                    },
-                ]}
-                title=""
-                id="Search Form"
-                onSubmit={onEventSearch}
-                customFooter={<Button type="submit" text="Submit" />}                             
-                    />  
-                    </div>
-                    <p> <br/>  </p>
-
-                <div className={styles.container2}>               
-                {isWeb3Enabled ? (
-                    loading ? (
-                        <div>Loading...</div>
-                    ) : ( 
-                            listedEvents?.eventOccurrences.map((event) => {
-                            console.log(event)
-                            const { type, timestamp, tokenId, tokenURI, owner, newOwner, operator, id } = event
-                            return (
-                                <NFTEventBox
-                                    type={type}
-                                    timestamp={timestamp}
-                                    tokenId={tokenId}
-                                    tokenURI={tokenURI}
-                                    owner={owner}
-                                    newOwner={newOwner}
-                                    operator={operator}
-                                    id={id}
-                                />
-                               )
-                            })
-                           
-                        )
-                    ) : ( <div></div> )
-                }
-                </div>
-
+        <div className={classNames(classes.main, classes.mainRaised)}>
+            <div className={classes.container}>
+                <ProductSection />         
             </div>
-        </div>            
+        </div>
+      <Footer />
     </div>
+
     )
-}
-   
-    //                     icons: 
-    //                     name: "🖼 Link to asset: E.g. https://gateway.pinata.cloud/ipfs/<hash>",
-    //                   
-    //                     name: "🤔 Name: E.g. My first NFT!",
-    //           
-    //                     name: "✍️ Description: E.g. Even cooler than cryptokitties ;)",         
+    }
+
+    
+         

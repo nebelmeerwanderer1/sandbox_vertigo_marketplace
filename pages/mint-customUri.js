@@ -1,4 +1,4 @@
-import styles from "../styles/Home.module.css"
+//import styles from "../styles/Home.module.css"
 import { Form, useNotification, Button, Tab } from "web3uikit"
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { ethers } from "ethers"
@@ -15,13 +15,48 @@ import React, { useReducer } from "react";
 import Head from "next/head";
 import DropZone from "../components/DropZone";
 
-import Landing from "../components/dragndropfiles/Landing"
 
 
 import contractABI from "../constants/customUri.json"
 const contractAddress = "0x2AAEE7DC30dcF135c8cAfC4aADd9D638c1eEA89A";
 
-export default function Home() {
+// ---material kit imports -------------------
+
+//import React from "react";
+// nodejs library that concatenates classes
+import classNames from "classnames";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+
+// @material-ui/icons
+
+// core components
+import Header from "../components/Header/Header.js";
+import Footer from "../components/Footer/Footer.js";
+import GridContainer from "../components/Grid/GridContainer.js";
+import GridItem from "../components/Grid/GridItem.js";
+//  import Button from "../components/CustomButtons/Button.js";
+import HeaderLinks from "../components/Header/HeaderLinks.js";
+import Parallax from "../components/Parallax/Parallax.js";
+
+import styles from "../styles/jss/nextjs-material-kit/pages/landingPage.js";
+
+// Sections for this page
+import ProductSection from "../pages-sections/mint-customURI-Sections/ProductSection.js";
+import StepsSection from "../pages-sections/mint-customURI-Sections/StepsSection.js";
+import WorkSection from "../pages-sections/LandingPage-Sections/WorkSection.js";
+
+const dashboardRoutes = [];
+const useStyles = makeStyles(styles);
+
+
+export default function Home(props) {
+    // ---------- material UI -------------
+    const classes = useStyles();
+    const { ...rest } = props;
+
+    //----------------functionality -----------------
+
     const { chainId, account, isWeb3Enabled } = useMoralis()
     const chainString = chainId ? parseInt(chainId).toString() : "31337"
     const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
@@ -237,199 +272,44 @@ export default function Home() {
     // the return --------------------------------------------
     
     return (
-        <section class="text-gray-600 body-font">
-    <div className="container mx-auto">
-    <h1 className="py-2 px-4  bg-gray-500 text-white text-end">{status}</h1>
+        <div>
+        <Header
+            color="transparent"
+            routes={dashboardRoutes}
+            brand="HOME"
+            rightLinks={<HeaderLinks />}
+            fixed
+            changeColorOnScroll={{
+            height: 400,
+            color: "white"
+            }}
+            {...rest}
+        />
+      <Parallax filter responsive image="/img/bg3.jpg">
+        <div className={classes.container}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+              <h1 className={classes.title}>TIME TO BECOME CREATIVE.</h1>
+              <h4>
+                This NFT smart contract has the standard set of capabilities, except that you can update properties.
+                However, the events give you a full trail of current and previous properties so nothing is lost.   
+              </h4>
+              <br />              
+            </GridItem>            
+          </GridContainer>
+        </div>
+      </Parallax>
 
-    <div class="flex flex-col text-center w-full mb-10">
-            <h2 class="text-xs text-indigo-500 tracking-widest mt-10 font-medium title-font mb-1">TIME TO BECOME CREATIVE</h2>
-            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4  text-gray-900">How to mint a Non-fungible Token (NFT)</h1>
-            {/* <p class="lg:w-2/3 mx-auto leading-relaxed text-base">What happens beneath the hood when you mint Non-Fungible Tokens (NFTs), list for sale and buy from others.</p>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p> */}
-          </div>
-
-
-          <div class="flex flex-wrap">            
-            <div class="xl:w-1/5 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">1: Upload an asset - file or image - to the Inter Planetary File System (IPFS).</p>
-              
+        <div className={classNames(classes.main, classes.mainRaised)}>
+            <div className={classes.container}>
+                <ProductSection />         
             </div>
-            <div class="xl:w-1/5 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">2: Copy the link to the 'Mint NFT' form. Add name and description.</p>
-              
-            </div>
-            
-            <div class="xl:w-1/5 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">3: Submit the form to the blockchain and pay the transaction fee.</p>
-              
-            </div>
-            <div class="xl:w-1/5 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base mb-4">4. If you want to update an existing NFT instead, then use the 'Update NFT' form.</p>
-              
-            </div><div class="xl:w-1/5 lg:w-1/2 md:w-full px-8 py-3 border-l-2 border-gray-200 border-opacity-60">
-              {/* <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">This is a hands-on experience</h2> */}
-              <p class="leading-relaxed text-base">5: Go to the smart contract on etherscan and follow the creation process.</p>
-              <a className="leading-relaxed text-base mb-4 underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href={"https://goerli.etherscan.io/address/0x2aaee7dc30dcf135c8cafc4aadd9d638c1eea89a"} target="popup">Link</a>  
-            </div>           
-          </div>   
-
-            <div className="grid grid-cols-2">
-                <div>
-                <h1 class="px-4 sm:text-xl text-2xl font-medium text-center title-font mt-10 text-gray-900">Your NFTs</h1>  
-                </div>
-                <div>
-                <h1 class="px-4 sm:text-xl text-2xl font-medium text-center title-font mt-10 text-gray-900">Mint and update forms</h1>    
-                </div>
-            </div>
-
-
-        <div className="grid grid-cols-2">
-
-                <div className="flex-wrap ml-10 mr-10 mt-10">  
-                            
-                {isWeb3Enabled ? (
-                    loading ? (
-                        <div>Loading...</div>
-                    ) : (
-                        nftList.ownedNfts?.map((nft) => {
-                            const { tokenId, contract, price } = nft
-                            return (
-                                <NFTBox
-                                    price={price}
-                                    nftAddress={contract.address}
-                                    contractABI={contractABI}
-                                    tokenId={tokenId}
-                                    marketplaceAddress={marketplaceAddress}
-                                    seller={account}
-                                    key={`${contract.address}${tokenId}`}
-                                />
-                            )
-                        })
-                    )
-                ) : (
-                    <div> </div>
-                )}
-                </div>  
-
-                <div className=" flex-wrap mr-5 mt-10  bg-slate-100"> 
-                <div className={styles.container}>
-                <p id="status" className={styles.ddescription}>
-                {/* {status} */}
-                </p>                
-                {/* Pass state data and dispatch to the DropZone component */}                
-                <Landing />
-                {/* <DropZone data={data} dispatch={dispatch2} /> */}
-                <p>
-                     <br></br> 
-                </p>
-                <Form 
-                    data={[
-                    {
-                        name: "Link to asset: E.g. https://gateway.pinata.cloud/ipfs/<hash>",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "url",
-                    },
-                    {
-                        name: "Name: E.g. My first NFT!",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "name",
-                    },
-                    {
-                        name: "Description: E.g. Even cooler than cryptokitties ;)",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "description",
-                    },
-                    {
-                        name: "Owner's address: E.g. you or your best friend",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },                        
-                        value: "",
-                        key: "owner",
-                    },
-                ]}
-                title="Mint your NFT!"
-                id="Mint Form" 
-                onSubmit={onMintPressed}
-                customFooter={<Button type="submit" text="Submit" />}              
-                />
-                <p id="mintstatus" className={styles.ddescription}>
-                {mintstatus}
-                </p>
-                <Form 
-                    data={[
-                    {
-                        name: "Token Id # of the NFT that you want to update",
-                        type: "number",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },                        
-                        value: "",
-                        key: "tokenid",
-                    },
-                    {
-                        name: "New link to asset: E.g. https://gateway.pinata.cloud/ipfs/<hash>",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "url",
-                    },
-                    {
-                        name: "New name: E.g. My first NFT!",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "name",
-                    },
-                    {
-                        name: "New description: E.g. Even cooler than cryptokitties ;)",
-                        type: "text",
-                        inputWidth: "100%",
-                        validation: {
-                            required: true
-                            },
-                        value: "",
-                        key: "description",
-                    },  
-                ]}
-                title="Update your NFT!"
-                id="Update Form" 
-                onSubmit={onUpdatePressed}
-                customFooter={<Button type="submit" text="Submit" />}              
-                />               
-                </div>
-            </div>
-                   
-        </div>            
+        </div>
+      <Footer />
     </div>
-    </section>
+
     )
-}      
+    }
+
+
+

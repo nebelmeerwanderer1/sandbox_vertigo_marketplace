@@ -4,8 +4,9 @@ import NFTBox from "../components/NFTBox-index"
 import networkMapping from "../constants/networkMapping.json"
 import GET_ACTIVE_ITEMS from "../constants/subgraphQueries"
 import { useQuery } from "@apollo/client"
-import { jsx, Container, Box, Grid, Text, Heading } from "theme-ui";
+import { jsx, Container, Box, Grid, Text, Heading, Link } from "theme-ui";
 import TextFeature from "../components/text-feature";
+
 
 
 export default function Home() {
@@ -24,6 +25,13 @@ export default function Home() {
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Basic web3 kit</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Taking these steps will get you up and running - not just for this particular site.</p>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
+            <Link href="/">
+              <a class="text-indigo-500 inline-flex items-center">Back
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+              </Link>
           </div>
 
 
